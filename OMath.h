@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cmath>
+#include <limits>
 
 using namespace std;
 
@@ -29,6 +30,12 @@ public:
 
     double desvioPadraoA(vecDb &vecMeds);
     double desvioPadraoA();
+
+    double max(vecDb& vecMeds);
+    double max();
+
+    double min(vecDb& vecMeds);
+    double min();
 
     vecDb vecMedidas() const;
     void setVecMedidas(const vecDb &vecMeds);

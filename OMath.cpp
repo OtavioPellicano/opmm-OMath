@@ -115,6 +115,42 @@ double OMath::desvioPadraoA()
     return desvioPadraoA(mVecMedidas);
 }
 
+double OMath::max(vecDb &vecMeds)
+{
+    double max = std::numeric_limits<double>::min();
+    for(auto itVec = vecMeds.begin(); itVec != vecMeds.end(); ++itVec)
+    {
+        if(*itVec > max)
+            max = *itVec;
+    }
+    return max;
+}
+
+double OMath::max()
+{
+    if(mVecMedidas.empty())
+        return -1;
+    return max(mVecMedidas);
+}
+
+double OMath::min(vecDb &vecMeds)
+{
+    double min = std::numeric_limits<double>::max();
+    for(auto itVec = vecMeds.begin(); itVec != vecMeds.end(); ++itVec)
+    {
+        if(*itVec < min)
+            min = *itVec;
+    }
+    return min;
+}
+
+double OMath::min()
+{
+    if(mVecMedidas.empty())
+        return -1;
+    return min(mVecMedidas);
+}
+
 vecDb OMath::vecMedidas() const
 {
     return mVecMedidas;
