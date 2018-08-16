@@ -37,8 +37,18 @@ public:
     double min(vecDb& vecMeds);
     double min();
 
+    bool truncar(vecDb& vecMeds, const size_t &numDigitos);
+    bool truncar(const size_t &numDigitos);
+    bool truncar(double& medida, const size_t& numDigitos);
+
+    bool arredondar(vecDb& vecMeds, const size_t &numDigitos);
+    bool arredondar(const size_t& numDigitos);
+    bool arredondar(double& medida, const size_t& numDigitos);
+
     vecDb vecMedidas() const;
     void setVecMedidas(const vecDb &vecMeds);
+
+    vecDb* vecMedidas();
 
 private:
     vecDb mVecMedidas;

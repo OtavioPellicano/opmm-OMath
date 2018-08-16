@@ -151,6 +151,145 @@ double OMath::min()
     return min(mVecMedidas);
 }
 
+bool OMath::truncar(vecDb &vecMeds, const size_t& numDigitos)
+{
+    for(auto itVec = vecMeds.begin(); itVec != vecMeds.end(); ++itVec)
+    {
+        if(!truncar(*itVec, numDigitos))
+            return false;
+    }
+
+    return true;
+}
+
+bool OMath::truncar(const size_t &numDigitos)
+{
+    if(mVecMedidas.empty())
+        return false;
+    return truncar(mVecMedidas, numDigitos);
+}
+
+bool OMath::truncar(double &medida, const size_t &numDigitos)
+{
+    std::string str;
+    std::string::iterator posStr;
+    std::string::iterator itStr;
+
+    str = std::to_string(medida);
+    try {
+        itStr = std::find(str.begin(), str.end(), '.');
+        if(itStr != str.end())
+        {
+            posStr = itStr  + 1 + numDigitos;
+            if(posStr <= str.end())
+            {
+                str = std::string(str.begin(), posStr);
+            }
+            else
+            {
+                str = medida;
+            }
+        }
+        else
+        {
+            str = medida;
+        }
+    } catch (...) {
+        return false;
+    }
+
+    medida = std::stod(str);
+
+    return true;
+}
+
+bool OMath::arredondar(vecDb &vecMeds, const size_t &numDigitos)
+{
+    for(auto itVec = vecMeds.begin(); itVec != vecMeds.end(); ++itVec)
+    {
+        if(!arredondar(*itVec, numDigitos))
+            return false;
+    }
+
+    return true;
+}
+
+bool OMath::arredondar(const size_t &numDigitos)
+{
+    if(mVecMedidas.empty())
+        return false;
+    return arredondar(mVecMedidas, numDigitos);
+}
+
+bool OMath::arredondar(double &medida, const size_t &numDigitos)
+{
+    std::string str;
+    std::string::iterator posStr;
+    std::string::iterator posStrArred;
+    std::string::iterator itStr;
+    int intTemp;
+
+    str = std::to_string(medida);
+    try {
+        itStr = std::find(str.begin(), str.end(), '.');
+        if(itStr != str.end())
+        {
+            posStr = itStr  + 1 + numDigitos;
+            if(posStr <= str.end())
+            {
+                posStrArred = posStr;
+                if(*posStr != '.' && *posStr != '-')
+                {
+                    intTemp = int(*posStr);        //normalizando da tabela ASCII
+                    if(intTemp - 48 >= 5)
+                    {
+                        --posStr;
+                        for(;posStr != str.begin();--posStr)
+                        {
+                            if(*posStr == '.')
+                                continue;
+
+                            if(*posStr == '-')
+                                break;
+
+                            intTemp = int(*posStr);    //normalizando da tabela ASCII
+                            ++intTemp;
+                            if(intTemp - 48 > 9)
+                            {
+                                *posStr = 48;   //0 no ASCII
+                            }
+                            else
+                            {
+                                *posStr = intTemp;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+                posStr = posStrArred;
+
+                str = std::string(str.begin(), posStr);
+            }
+            else
+            {
+                str = medida;
+            }
+        }
+        else
+        {
+            str = medida;
+        }
+    } catch (...) {
+        return false;
+    }
+
+    medida = std::stod(str);
+
+    return true;
+}
+
 vecDb OMath::vecMedidas() const
 {
     return mVecMedidas;
@@ -159,6 +298,11 @@ vecDb OMath::vecMedidas() const
 void OMath::setVecMedidas(const vecDb &vecMeds)
 {
     mVecMedidas = vecMeds;
+}
+
+vecDb *OMath::vecMedidas()
+{
+    return &mVecMedidas;
 }
 
 }
