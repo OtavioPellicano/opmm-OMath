@@ -31,6 +31,12 @@ public:
     double desvioPadraoA(vecDb &vecMeds);
     double desvioPadraoA();
 
+    double varianciaP(vecDb &vecMeds);
+    double varianciaP();
+
+    double varianciaA(vecDb &vecMeds);
+    double varianciaA();
+
     double max(vecDb& vecMeds);
     double max();
 

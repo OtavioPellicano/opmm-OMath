@@ -115,6 +115,59 @@ double OMath::desvioPadraoA()
     return desvioPadraoA(mVecMedidas);
 }
 
+double OMath::varianciaP(vecDb &vecMeds)
+{
+    double mmedia = media(vecMeds);
+
+    double somaDiffQuadratica = 0;
+    size_t i;
+
+    for(i = 0; i < vecMeds.size(); ++i)
+    {
+        somaDiffQuadratica += pow(vecMeds[i] - mmedia,2);
+    }
+
+    if(i != 0)
+        return somaDiffQuadratica/i;
+
+    return -1;
+}
+
+double OMath::varianciaP()
+{
+    if(mVecMedidas.empty())
+        return -1;
+    return varianciaP(mVecMedidas);
+
+}
+
+double OMath::varianciaA(vecDb &vecMeds)
+{
+    double mmedia = media(vecMeds);
+
+    double somaDiffQuadratica = 0;
+    size_t i;
+
+    for(i = 0; i < vecMeds.size(); ++i)
+    {
+        somaDiffQuadratica += pow(vecMeds[i] - mmedia,2);
+    }
+
+    if(i != 0)
+        return somaDiffQuadratica/(i-1);
+
+    return -1;
+
+}
+
+double OMath::varianciaA()
+{
+    if(mVecMedidas.empty())
+        return -1;
+    return varianciaA(mVecMedidas);
+
+}
+
 double OMath::max(vecDb &vecMeds)
 {
     double max = std::numeric_limits<double>::min();
