@@ -343,6 +343,31 @@ bool OMath::arredondar(double &medida, const size_t &numDigitos)
     return true;
 }
 
+double OMath::tendencia(vecDb &vecMeds)
+{
+    if(vecMeds.empty())
+    {
+        return -1;
+    }
+    else if(vecMeds.size() == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        std::vector<double> vecTemp{vecMeds.begin(), vecMeds.end() - 1};
+        return vecMeds.back()/media(vecTemp);
+    }
+
+}
+
+double OMath::tendencia()
+{
+    if(mVecMedidas.empty())
+        return -1;
+    return tendencia(mVecMedidas);
+}
+
 vecDb OMath::vecMedidas() const
 {
     return mVecMedidas;

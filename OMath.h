@@ -51,6 +51,9 @@ public:
     bool arredondar(const size_t& numDigitos);
     bool arredondar(double& medida, const size_t& numDigitos);
 
+    double tendencia(vecDb& vecMeds);
+    double tendencia();
+
     vecDb vecMedidas() const;
     void setVecMedidas(const vecDb &vecMeds);
 
