@@ -343,7 +343,7 @@ bool OMath::arredondar(double &medida, const size_t &numDigitos)
     return true;
 }
 
-double OMath::tendencia(vecDb &vecMeds)
+double OMath::tendencia(vecDb &vecMeds, const tipoTendencia &tpTendencia)
 {
     if(vecMeds.empty())
     {
@@ -356,16 +356,16 @@ double OMath::tendencia(vecDb &vecMeds)
     else
     {
         std::vector<double> vecTemp{vecMeds.begin(), vecMeds.end() - 1};
-        return vecMeds.back()/media(vecTemp);
+        return tpTendencia == tipoTendencia::MEDIA ? vecMeds.back()/media(vecTemp) : vecMeds.back()/mediana(vecTemp);
     }
 
 }
 
-double OMath::tendencia()
+double OMath::tendencia(const tipoTendencia &tpTendencia)
 {
     if(mVecMedidas.empty())
         return -1;
-    return tendencia(mVecMedidas);
+    return tendencia(mVecMedidas, tpTendencia);
 }
 
 vecDb OMath::vecMedidas() const

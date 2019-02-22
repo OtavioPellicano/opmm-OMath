@@ -16,6 +16,9 @@ typedef std::vector<double> vecDb;
 class OMath
 {
 public:
+    enum class tipoTendencia{MEDIA, MEDIANA};
+
+public:
     OMath();
     OMath(const vecDb &vecMedidas);
 
@@ -51,8 +54,8 @@ public:
     bool arredondar(const size_t& numDigitos);
     bool arredondar(double& medida, const size_t& numDigitos);
 
-    double tendencia(vecDb& vecMeds);
-    double tendencia();
+    double tendencia(vecDb& vecMeds, const tipoTendencia& tpTendencia);
+    double tendencia(const tipoTendencia& tpTendencia);
 
     vecDb vecMedidas() const;
     void setVecMedidas(const vecDb &vecMeds);
